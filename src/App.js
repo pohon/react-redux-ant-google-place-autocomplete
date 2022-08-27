@@ -9,7 +9,9 @@ const App = () => {
   return (
     <Layout>
       <Header/>
-
+      <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
       <Content>
         <GooglePlaceAutocomplete/>
       </Content>
