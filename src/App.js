@@ -2,21 +2,25 @@ import { Layout } from 'antd';
 import Footer from './components/Footer';
 import GooglePlaceAutocomplete from './components/GooglePlaceAutocomplete';
 import Header from './components/Header';
+import googlePlaceLogo from './assets/google-place.png'
 
 const { Content } = Layout;
 
 const App = () => {
   return (
-    <Layout>
-      <Header/>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-      <Content>
-        <GooglePlaceAutocomplete/>
+    <Layout className='h-screen bg-indigo-100'>
+      <Header />
+
+      <Content className='bg-white flex items-center flex-col pt-28'>
+        <img
+          className='w-72 h-auto'
+          src={googlePlaceLogo}
+          alt="google place api logo"
+        />
+        <GooglePlaceAutocomplete />
       </Content>
 
-      <Footer/>
+      <Footer />
     </Layout>
   );
 }
