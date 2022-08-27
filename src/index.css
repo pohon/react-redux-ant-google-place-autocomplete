@@ -3,3 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* override antd */
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-right-width: 0 !important;
+}

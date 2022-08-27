@@ -11,7 +11,7 @@ const App = () => {
     <Layout className='h-screen bg-indigo-100'>
       <Header />
 
-      <Content className='bg-white flex items-center flex-col pt-28'>
+      <Content className='bg-white flex items-center flex-col pt-24 md:pt-28 transition-all'>
         <img
           className='w-72 h-auto'
           src={googlePlaceLogo}
