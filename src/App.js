@@ -3,6 +3,7 @@ import Footer from './components/Footer';
 import GooglePlaceAutocomplete from './components/GooglePlaceAutocomplete';
 import Header from './components/Header';
 import googlePlaceLogo from './assets/google-place.png'
+import SearchHistory from './components/SearchHistory';
 
 const { Content } = Layout;
 
@@ -18,6 +19,7 @@ const App = () => {
           alt="google place api logo"
         />
         <GooglePlaceAutocomplete />
+        <SearchHistory/>
       </Content>
 
       <Footer />

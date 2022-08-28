@@ -2,65 +2,34 @@ import { AutoComplete } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchPlaces } from '../../redux/modules/autocomplete';
-
-const getRandomInt = (max, min = 0) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-const searchResult = (query) =>
-  new Array(getRandomInt(5))
-    .join('.')
-    .split('.')
-    .map((_, idx) => {
-      const category = `${query}${idx}`;
-      return {
-        value: category,
-        label: (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <span>
-              Found {query} on{' '}
-              <a
-                href={`https://s.taobao.com/search?q=${query}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {category}
-              </a>
-            </span>
-            <span>{getRandomInt(200, 100)} results</span>
-          </div>
-        ),
-      };
-    });
+import LinkToMap from './components/LinkToMap';
 
 const GooglePlaceAutocomplete = ({ autocomplete, fetchPlaces }) => {
 
-  console.log('autocomplete', autocomplete);
-
+  // states
   const [options, setOptions] = useState([]);
 
-  const handleSearch = (value) => {
-    setOptions(value ? searchResult(value) : []);
-  };
-
-  const onSelect = (value) => {
-    console.log('onSelect', value);
-  };
-
-  // effects
   useEffect(() => {
-    fetchPlaces('jaka')
+
+    if (autocomplete.loaded) {
+      setOptions(autocomplete.data?.predictions?.map(datum => ({
+        value: datum['place_id'],
+        label: (
+          <LinkToMap data={datum} />
+        )
+      })) || [])
+    }
+    else {
+      setOptions([])
+    }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [autocomplete.loaded])
 
   return (
     <AutoComplete
       options={options}
-      onSelect={onSelect}
-      onSearch={handleSearch}
+      onSearch={input => { if (input) fetchPlaces(input); }}
     >
       <div className='border-0 pt-0'>
         <div className="relative">
@@ -69,9 +38,11 @@ const GooglePlaceAutocomplete = ({ autocomplete, fetchPlaces }) => {
               <path strokeLinecap="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
           </div>
-          <input type="text" name="price" id="price"
+          <input
+            type="text"
             className="focus:ring-indigo-500 focus:border-indigo-500 block w-80 md:w-96 px-12 py-3 text-base border-gray-300 rounded-full shadow-xl"
-            placeholder="Select places" />
+            placeholder="Input search here"
+          />
         </div>
       </div>
     </AutoComplete>

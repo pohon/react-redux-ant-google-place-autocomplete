@@ -10,7 +10,7 @@ import {
 export const fetchAutocomplete = action$ => action$.pipe(
   ofType(FETCH_PLACES),
   mergeMap(action =>
-    ajax.getJSON(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${action.input}&key=`).pipe(
+    ajax.getJSON(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${action.input}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).pipe(
       map(response => fetchPlacesFulfilled(response))
     )
   )

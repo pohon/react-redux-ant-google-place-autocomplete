@@ -6,7 +6,6 @@ import {
   PONG
 } from '../redux/modules/pingpong';
 
-// TODO: progress
 export const pingEpic = action$ =>
   action$.pipe(
     ofType(PING),
