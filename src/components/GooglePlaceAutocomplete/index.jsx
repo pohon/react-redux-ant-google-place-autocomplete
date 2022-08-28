@@ -1,7 +1,7 @@
 import { AutoComplete } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { ping } from '../../redux/modules/pingpong';
+import { fetchPlaces } from '../../redux/modules/autocomplete';
 
 const getRandomInt = (max, min = 0) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -36,7 +36,10 @@ const searchResult = (query) =>
       };
     });
 
-const GooglePlaceAutocomplete = ({ isPinging, ping }) => {
+const GooglePlaceAutocomplete = ({ autocomplete, fetchPlaces }) => {
+
+  console.log('autocomplete', autocomplete);
+
   const [options, setOptions] = useState([]);
 
   const handleSearch = (value) => {
@@ -46,6 +49,12 @@ const GooglePlaceAutocomplete = ({ isPinging, ping }) => {
   const onSelect = (value) => {
     console.log('onSelect', value);
   };
+
+  // effects
+  useEffect(() => {
+    fetchPlaces('jaka')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AutoComplete
@@ -64,11 +73,9 @@ const GooglePlaceAutocomplete = ({ isPinging, ping }) => {
             className="focus:ring-indigo-500 focus:border-indigo-500 block w-80 md:w-96 px-12 py-3 text-base border-gray-300 rounded-full shadow-xl"
             placeholder="Select places" />
         </div>
-        <div>{`is pinging: ${isPinging}`}</div>
-        <button onClick={ping}>ping</button>
       </div>
     </AutoComplete>
   );
 };
 
-export default connect(({ isPinging }) => ({ isPinging }), { ping })(GooglePlaceAutocomplete);
+export default connect(states => states, { fetchPlaces })(GooglePlaceAutocomplete);
