@@ -26,7 +26,7 @@ npm start
 
 5. Open Safari, head to Develop menu, click Disable Cross-Origin Restrictions
 
-![disable CORS on Safari](https://i.ibb.co/16MVxJ2/Screen-Shot-2022-08-28-at-23-15-09.png)
+![disable CORS on Safari](https://i.ibb.co/mvPRc1s/Apple-Mac-Safari-Disable-Cross-Origin-Restrictions-for-BMC-Community-2.png)
 
 6. Open http://localhost:3000
 7. Done!
