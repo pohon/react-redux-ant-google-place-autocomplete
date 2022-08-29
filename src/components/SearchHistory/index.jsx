@@ -2,9 +2,9 @@ import { Tag } from "antd";
 import { connect } from "react-redux";
 
 const SearchHistory = ({ searchHistory }) => {
-
+  console.log('searchHistory', searchHistory);
   return (
-    <div className="pt-96">
+    <div className="pt-20">
       {
         searchHistory?.list?.map((historyObj, historyIndex) => (
           <Tag key={`history-${historyIndex}`}>
